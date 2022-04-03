@@ -37,10 +37,11 @@
     });
 
     $('#people-table').on('click', '.edit-button', function () {
-
         const id = $(this).data('id');
-        $('#first-name-modal').val($(this).data('first-name'));
-        $('#last-name-modal').val($(this).data('last-name'));
+        const firstName = $(this).data('first-name');
+        const lastName = $(this).data('last-name');
+        $('#first-name-modal').val(firstName);
+        $('#last-name-modal').val(lastName);;
         $('#age-modal').val($(this).data('age'));
         $('#person-name').html(`${firstName} ${lastName}`);
         $('.modal').data('person-id', id);
@@ -49,11 +50,10 @@
     });
 
     $('#save').on('click', function () {
-
         const firstName = $("#first-name-modal").val();
         const lastName = $("#last-name-modal").val();
         const age = $("#age-modal").val();
-        const id = $('.modal').data('id');
+        const id = $('.modal').data('person-id');
 
         $.post('/people/updateperson', { id, firstName, lastName, age }, function () {
             $('.modal').modal('hide');
